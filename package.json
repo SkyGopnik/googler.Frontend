@@ -1,0 +1,66 @@
+{
+  "name": "frontend.template",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "prepare": "husky install && npm run init:git",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "quality": "npm run lint:ts && npm run lint:scss",
+    "quality:fix": "npm run lint:ts:fix && npm run lint:scss:fix",
+    "lint:ts": "eslint \"**/*.{ts,tsx}\"",
+    "lint:ts:fix": "eslint \"**/*.{ts,tsx}\" --fix",
+    "lint:scss": "npx stylelint \"**/*.scss\"",
+    "lint:scss:fix": "npx stylelint \"**/*.scss\" --fix",
+    "init:git": "git config core.autocrlf false && git config core.eol lf"
+  },
+  "dependencies": {
+    "classnames": "^2.5.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "sass": "^1.58.0",
+    "zustand": "^4.4.7"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "18.4.3",
+    "@types/node": "18.11.19",
+    "@types/react": "18.2.55",
+    "@types/react-dom": "18.2.19",
+    "@typescript-eslint/eslint-plugin": "6.21.0",
+    "@typescript-eslint/parser": "6.21.0",
+    "@vitejs/plugin-react": "4.2.1",
+    "commitlint": "18.4.3",
+    "eslint": "8.22.0",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-react": "7.30.1",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "eslint-plugin-unused-imports": "2.0.0",
+    "frontend.configs": "1.0.7",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.0",
+    "react-html-props": "^2.0.3",
+    "stylelint": "^15.4.0",
+    "stylelint-config-standard-scss": "^7.0.1",
+    "stylelint-order": "^6.0.2",
+    "typescript": "5.3.3",
+    "vite": "5.1.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "commitlint": {
+    "extends": "./node_modules/frontend.configs/commitlintrc.json"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/frontend.configs/eslintrc.js"
+  },
+  "stylelint": {
+    "extends": "./node_modules/frontend.configs/stylelintrc.json"
+  },
+  "lint-staged": {
+    "**/*.{scss}": "npm run lint:scss:fix",
+    "**/*.{ts,tsx}": "npm run lint:ts:fix"
+  }
+}
