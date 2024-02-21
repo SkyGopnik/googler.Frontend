@@ -1,5 +1,8 @@
 {
   "extends": "./node_modules/frontend.configs/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./src"
+  },
   "include": [
     "**/*.ts",
     "**/*.tsx"

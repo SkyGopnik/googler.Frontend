@@ -1,0 +1,59 @@
+.background {
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  overflow: hidden;
+
+  z-index: -1;
+
+  &__circle {
+    width: 342px;
+    height: 342px;
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    &:nth-child(1),
+    &:nth-child(2) {
+      top: -200px;
+    }
+
+    &:nth-child(3),
+    &:nth-child(4) {
+      bottom: -200px;
+
+      transform: rotate(180deg);
+    }
+
+    &:nth-child(1),
+    &:nth-child(3) {
+      left: -90px;
+    }
+
+    &:nth-child(2),
+    &:nth-child(4) {
+      right: -90px;
+    }
+
+    &:nth-child(1) {
+      background: linear-gradient(180deg, #FFE351 0%, rgba(255, 227, 81, 0) 100%);
+    }
+
+    &:nth-child(2) {
+      background: linear-gradient(180deg, #39D78D 0%, rgba(57, 215, 141, 0) 100%);
+    }
+
+    &:nth-child(3) {
+      background: linear-gradient(180deg, #57A5FF 0%, rgba(87, 165, 255, 0) 100%);
+    }
+
+    &:nth-child(4) {
+      background: linear-gradient(180deg, #FF4A2B 0%, rgba(255, 74, 43, 0) 100%);
+    }
+  }
+}

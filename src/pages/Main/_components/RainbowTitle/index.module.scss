@@ -1,0 +1,21 @@
+.title {
+  span {
+    &:nth-child(1),
+    &:nth-child(5) {
+      color: #ffe351;
+    }
+
+    &:nth-child(2),
+    &:nth-child(6) {
+      color: #57a5ff;
+    }
+
+    &:nth-child(3) {
+      color: #4ce69e;
+    }
+
+    &:nth-child(4) {
+      color: #ff4a2b;
+    }
+  }
+}
