@@ -1,8 +1,8 @@
-import classNames from "classnames";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import { useGameStore } from "store/game";
 import { useAsyncEffect } from "hooks/useAsyncEffect";
+import Button from "components/Button";
 
 import style from "./index.module.scss";
 
@@ -37,20 +37,12 @@ export default function Actions() {
 
   return (
     <div className={style.actions}>
-      <button
-        className={classNames(
-          style.actions__button,
-          style.actions__buttonPlay
-        )}
-        onClick={startGame}
-      >
+      <Button onClick={startGame}>
         {game ? "Продолжить" : "Начать"} игру
-      </button>
-      <button
-        className={style.actions__button}
-      >
+      </Button>
+      <Button type="outline">
         Рейтинг
-      </button>
+      </Button>
     </div>
   );
 }

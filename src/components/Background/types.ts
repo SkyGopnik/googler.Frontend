@@ -1,5 +1,5 @@
-type Type = "default" | "success" | "fail" | "record" | "finish";
+type BackgroundType = "default" | "success" | "fail" | "record" | "finish";
 
 export interface BackgroundProps {
-  type?: Type
+  type?: BackgroundType
 }

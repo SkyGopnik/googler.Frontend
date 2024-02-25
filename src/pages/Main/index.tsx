@@ -6,15 +6,17 @@ import Stats from "components/Stats";
 import Actions from "./_components/Actions";
 import Logo from "./_components/Logo";
 
+import style from "./index.module.scss";
+
 export default function MainPage() {
   return (
     <Page>
-      <Background />
       <PageContent>
         <Logo />
-        <Stats score={0} record={0} />
+        <Stats className={style.stats} score={0} record={0} />
         <Actions />
       </PageContent>
+      <Background />
     </Page>
   );
 }

@@ -43,7 +43,7 @@
     "frontend.configs": "1.0.10",
     "husky": "^8.0.3",
     "lint-staged": "^15.2.0",
-    "react-html-props": "^2.0.3",
+    "react-html-props": "^2.0.9",
     "stylelint": "^15.4.0",
     "stylelint-config-standard-scss": "^7.0.1",
     "stylelint-order": "^6.0.2",

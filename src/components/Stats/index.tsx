@@ -1,13 +1,22 @@
+import { DivProps } from "react-html-props";
+import classNames from "classnames";
+
 import style from "./index.module.scss";
 
-interface Props {
+interface Props extends DivProps {
   score: number,
   record: number
 }
 
-export default function Stats({ score, record }: Props) {
+export default function Stats({ score, record, ...props }: Props) {
   return (
-    <div className={style.stats}>
+    <div
+      {...props}
+      className={classNames(
+        style.stats,
+        props.className
+      )}
+    >
       <div className={style.stats__item}>
         <p className={style.item__description}>Рекорд</p>
         <h1 className={style.item__title}>{score}</h1>

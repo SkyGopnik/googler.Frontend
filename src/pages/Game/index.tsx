@@ -80,6 +80,7 @@ export default function GamePage() {
         <img src={staticUrl + firstRequest.imageId + ".jpeg"} alt="Верхнее изображение" />
         <img src={staticUrl + secondRequest.imageId + ".jpeg"} alt="Нижнее изображение" />
       </div>
+      {/*<Background type="success" />*/}
     </Page>
   );
 }
