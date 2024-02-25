@@ -1,23 +1,20 @@
 import Background from "components/Background";
+import Page from "components/Page";
+import PageContent from "components/PageContent";
+import Stats from "components/Stats";
 
 import Actions from "./_components/Actions";
-import Info from "./_components/Info";
-import RainbowTitle from "./_components/RainbowTitle";
-
-import LineImage from "./_assets/line.svg";
-
-import style from "./index.module.scss";
+import Logo from "./_components/Logo";
 
 export default function MainPage() {
   return (
-    <div className={style.main}>
+    <Page>
       <Background />
-      <h1 className={style.main__title}>
-        <span>Что <RainbowTitle /> больше?</span>
-        <img src={LineImage} alt="" />
-      </h1>
-      <Info />
-      <Actions />
-    </div>
+      <PageContent>
+        <Logo />
+        <Stats score={0} record={0} />
+        <Actions />
+      </PageContent>
+    </Page>
   );
 }

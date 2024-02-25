@@ -8,7 +8,7 @@
 
   overflow: hidden;
 
-  z-index: -1;
+  z-index: 50;
 
   &__circle {
     width: 342px;
@@ -39,21 +39,66 @@
     &:nth-child(4) {
       right: -90px;
     }
+  }
 
-    &:nth-child(1) {
-      background: linear-gradient(180deg, #FFE351 0%, rgba(255, 227, 81, 0) 100%);
+  &Type {
+    &_default {
+      .background__circle {
+        &:nth-child(1) {
+          background: linear-gradient(180deg, #FFE351 0%, rgba(255, 227, 81, 0) 100%);
+        }
+
+        &:nth-child(2) {
+          background: linear-gradient(180deg, #39D78D 0%, rgba(57, 215, 141, 0) 100%);
+        }
+
+        &:nth-child(3) {
+          background: linear-gradient(180deg, #57A5FF 0%, rgba(87, 165, 255, 0) 100%);
+        }
+
+        &:nth-child(4) {
+          background: linear-gradient(180deg, #FF4A2B 0%, rgba(255, 74, 43, 0) 100%);
+        }
+      }
     }
 
-    &:nth-child(2) {
-      background: linear-gradient(180deg, #39D78D 0%, rgba(57, 215, 141, 0) 100%);
+    &_success {
+      &:nth-child(1),
+      &:nth-child(2),
+      &:nth-child(3),
+      &:nth-child(4) {
+        background: linear-gradient(180deg, #39D78D 0%, rgba(57, 215, 141, 0) 100%);
+      }
     }
 
-    &:nth-child(3) {
-      background: linear-gradient(180deg, #57A5FF 0%, rgba(87, 165, 255, 0) 100%);
+    &_fail {
+      &:nth-child(1),
+      &:nth-child(2),
+      &:nth-child(3),
+      &:nth-child(4) {
+        background: linear-gradient(180deg, #FF4A2B 0%, rgba(255, 74, 43, 0) 100%);
+      }
     }
 
-    &:nth-child(4) {
-      background: linear-gradient(180deg, #FF4A2B 0%, rgba(255, 74, 43, 0) 100%);
+    &_record {
+      &:nth-child(1),
+      &:nth-child(2),
+      &:nth-child(3),
+      &:nth-child(4) {
+        background: linear-gradient(180deg, #FFE351 0%, rgba(255, 227, 81, 0) 100%);
+      }
+    }
+
+    &_finish {
+      &:nth-child(1),
+      &:nth-child(2) {
+        background: linear-gradient(180deg, #39D78D 0%, rgba(57, 215, 141, 0) 100%);
+      }
+
+      &:nth-child(3),
+      &:nth-child(4) {
+        background: linear-gradient(180deg, #FF4A2B 0%, rgba(255, 74, 43, 0) 100%);
+      }
     }
   }
 }

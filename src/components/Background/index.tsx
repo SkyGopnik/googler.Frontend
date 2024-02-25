@@ -1,12 +1,21 @@
-import styles from "./index.module.scss";
+import classNames from "classnames";
 
-export default function Background() {
+import { BackgroundProps } from "./types";
+
+import style from "./index.module.scss";
+
+export default function Background({ type = "default" }: BackgroundProps) {
   return (
-    <div className={styles.background}>
-      <div className={styles.background__circle} />
-      <div className={styles.background__circle} />
-      <div className={styles.background__circle} />
-      <div className={styles.background__circle} />
+    <div
+      className={classNames(
+        style.background,
+        style[`backgroundType_${type}`]
+      )}
+    >
+      <div className={style.background__circle} />
+      <div className={style.background__circle} />
+      <div className={style.background__circle} />
+      <div className={style.background__circle} />
     </div>
   );
 }
