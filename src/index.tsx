@@ -8,6 +8,8 @@ import MainPage from "pages/Main";
 import GamePage from "pages/Game";
 import GameRetryPage from "pages/Game/_pages/Retry";
 import GameFinishPage from "pages/Game/_pages/Finish";
+import bridge from "@vkontakte/vk-bridge";
+import RatingPage from "pages/Rating";
 
 import "./style/index.scss";
 
@@ -34,10 +36,17 @@ const router = createMemoryRouter([
   {
     path: "/game/finish",
     element: <GameFinishPage />
+  },
+  {
+    path: "/rating",
+    element: <RatingPage />
   }
 ], {
   initialEntries: ["/"]
 });
+
+bridge.send("VKWebAppInit")
+  .catch((err) => console.error(err));
 
 createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

@@ -3,13 +3,16 @@ import axios from "axios";
 import { useGameStore } from "store/game";
 import { useAsyncEffect } from "hooks/useAsyncEffect";
 import Button from "components/Button";
+import { useState } from "react";
 
 import style from "./index.module.scss";
 
 export default function Actions() {
-  const { game, setGame, setRequests } = useGameStore();
+  const { startGame } = useGameStore();
 
   const navigate = useNavigate();
+
+  const [activeGameId, setActiveGameId] = useState();
 
   useAsyncEffect(async () => {
     const { data } = await axios.get("/games/active");
@@ -18,29 +21,21 @@ export default function Actions() {
       return;
     }
 
-    setGame(data);
+    setActiveGameId(data.id);
   }, []);
 
-  const startGame = async () => {
-    const { data } = await axios.post(
-      !game ? "/games/new" : `/games/${game.id}/continue`
-    );
-
-    if (!game) {
-      setGame(data.game);
-    }
-
-    setRequests(data.requests);
+  const handleStartGame = async () => {
+    await startGame(activeGameId);
 
     navigate("/game");
   };
 
   return (
     <div className={style.actions}>
-      <Button onClick={startGame}>
-        {game ? "Продолжить" : "Начать"} игру
+      <Button onClick={handleStartGame}>
+        {activeGameId ? "Продолжить" : "Начать"} игру
       </Button>
-      <Button type="outline">
+      <Button type="outline" onClick={() => navigate("/rating")}>
         Рейтинг
       </Button>
     </div>

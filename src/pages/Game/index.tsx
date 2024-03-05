@@ -3,8 +3,11 @@ import CountUp from "react-countup";
 import Page from "components/Page";
 import { useGameStore } from "store/game";
 import axios from "axios";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useNavigate } from "react-router";
+import Background from "components/Background";
+import { delay } from "utils/delay";
+import { getStaticUrl } from "utils/getStaticUrl";
 
 import style from "./index.module.scss";
 
@@ -13,9 +16,14 @@ export default function GamePage() {
 
   const {
     game,
+    stats,
     requests,
+    setGame,
+    setStats,
     setRequests
   } = useGameStore();
+
+  const [animationActive, setAnimationActive] = useState(false);
 
   const selectAnswer = async (type: "MORE" | "LESS") => {
     try {
@@ -27,18 +35,37 @@ export default function GamePage() {
         navigate("/game/retry");
       }
 
+      const { score } = data.game;
+
+      if (score > stats!.record) {
+        setStats({
+          ...stats!,
+          record: score
+        });
+      }
+
+      setGame(data.game);
       setRequests([...data.requests, ...requests]);
+
+      await showAnimation();
     } catch (e) {
       navigate("/game/finish");
     }
   };
 
+  const showAnimation = async () => {
+    setAnimationActive(true);
+
+    await delay(500);
+
+    setAnimationActive(false);
+  };
+
   const [firstRequest, secondRequest] = useMemo(() => requests, [requests]);
-  const staticUrl = axios.defaults.baseURL + "static/";
 
   return (
     <Page className={style.play}>
-      {/*<div className={style.play__score}>Твой счет: 20</div>*/}
+      <div className={style.play__score}>Твой счет: {game?.score}</div>
       <div className={style.play__request}>
         <h2 className={style.request__title}>{firstRequest.value}</h2>
         <p className={style.request__description}>
@@ -77,10 +104,13 @@ export default function GamePage() {
         </div>
       </div>
       <div className={style.play__background}>
-        <img src={staticUrl + firstRequest.imageId + ".jpeg"} alt="Верхнее изображение" />
-        <img src={staticUrl + secondRequest.imageId + ".jpeg"} alt="Нижнее изображение" />
+        <img src={getStaticUrl(firstRequest.imageId)} alt="Верхнее изображение" />
+        <img src={getStaticUrl(secondRequest.imageId)} alt="Нижнее изображение" />
       </div>
-      {/*<Background type="success" />*/}
+      <Background
+        type="success"
+        isActive={animationActive}
+      />
     </Page>
   );
 }

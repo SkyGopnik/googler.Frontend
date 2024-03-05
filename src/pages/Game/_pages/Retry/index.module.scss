@@ -1,3 +1,81 @@
-.retry {
-  // dw
+.title {
+  color: #FF4A2B;
+}
+
+.info {
+  margin-top: 30px;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  &__preview {
+    width: 40px;
+    height: 40px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+  }
+
+  &__title {
+    margin-top: 10px;
+
+    font-size: 24px;
+    font-weight: 800;
+
+    text-align: center;
+
+    color: #fff;
+  }
+
+  &__description {
+    margin-top: 4px;
+
+    display: flex;
+    flex-direction: column;
+
+    font-size: 18px;
+    font-weight: 600;
+
+    text-align: center;
+
+    color: #fff;
+
+    .count {
+      margin-top: 10px;
+
+      font-size: 30px;
+      font-weight: 700;
+
+      text-align: center;
+
+      color: #fff;
+    }
+  }
+}
+
+.caption {
+  max-width: 240px;
+
+  margin-top: 60px;
+
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 150%;
+
+  text-align: center;
+
+  color: #6c6c6c;
+}
+
+.actions {
+  width: 100%;
+
+  margin-top: 20px;
+  padding: 0 12px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }

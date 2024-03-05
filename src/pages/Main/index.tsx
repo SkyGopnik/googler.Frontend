@@ -2,6 +2,8 @@ import Background from "components/Background";
 import Page from "components/Page";
 import PageContent from "components/PageContent";
 import Stats from "components/Stats";
+import { useGameStore } from "store/game";
+import { useAsyncEffect } from "hooks/useAsyncEffect";
 
 import Actions from "./_components/Actions";
 import Logo from "./_components/Logo";
@@ -9,11 +11,21 @@ import Logo from "./_components/Logo";
 import style from "./index.module.scss";
 
 export default function MainPage() {
+  const { stats, getStats } = useGameStore();
+
+  useAsyncEffect(async () => {
+    await getStats();
+  }, []);
+
   return (
     <Page>
       <PageContent>
         <Logo />
-        <Stats className={style.stats} score={0} record={0} />
+        <Stats
+          className={style.stats}
+          record={stats?.record}
+          position={stats?.position}
+        />
         <Actions />
       </PageContent>
       <Background />
