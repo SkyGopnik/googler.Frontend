@@ -14,11 +14,7 @@ srcRootContent.forEach((directory) => {
 });
 
 export default defineConfig({
-  // resolve: {
-  //   alias: {
-  //     src: path.resolve("./src")
-  //   }
-  // },
+  base: "",
   resolve: {
     alias: {
       ...absolutePathAliases

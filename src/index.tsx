@@ -17,7 +17,7 @@ if (document.location.href) {
   axios.defaults.headers.common["Authorization"] = `VK ${document.location.href}`;
 }
 
-axios.defaults.baseURL = "http://localhost:8080/";
+axios.defaults.baseURL = "https://googler-api.skyreglis.com/";
 axios.defaults.responseType = "json";
 
 const router = createMemoryRouter([

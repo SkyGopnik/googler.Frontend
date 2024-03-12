@@ -108,39 +108,6 @@
         display: flex;
         align-items: center;
         gap: 10px;
-
-        .actions__button {
-          flex: 1;
-
-          padding: 12px 0;
-
-          font-size: 16px;
-          font-weight: 500;
-          line-height: 120%;
-
-          text-align: center;
-
-          cursor: pointer;
-
-          border: none;
-          border-radius: 30px;
-
-          transition: opacity .3s ease;
-
-          color: #fff;
-
-          &:hover {
-            opacity: .7;
-          }
-
-          &Less {
-            background: #ff4a2b;
-          }
-
-          &More {
-            background: #3bc33b;
-          }
-        }
       }
     }
   }
@@ -162,7 +129,7 @@
       width: 100%;
       height: 50%;
 
-      opacity: .6;
+      opacity: .5;
 
       object-fit: cover;
     }

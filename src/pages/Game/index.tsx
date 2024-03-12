@@ -1,4 +1,3 @@
-import classNames from "classnames";
 import CountUp from "react-countup";
 import Page from "components/Page";
 import { useGameStore } from "store/game";
@@ -9,7 +8,11 @@ import Background from "components/Background";
 import { delay } from "utils/delay";
 import { getStaticUrl } from "utils/getStaticUrl";
 
+import Button from "./_components/Button";
+
 import style from "./index.module.scss";
+
+type AnswerType = "MORE" | "LESS";
 
 export default function GamePage() {
   const navigate = useNavigate();
@@ -24,8 +27,19 @@ export default function GamePage() {
   } = useGameStore();
 
   const [animationActive, setAnimationActive] = useState(false);
+  const [loading, setLoading] = useState<{
+    [key in AnswerType]: boolean
+  }>({
+    LESS: false,
+    MORE: false
+  });
 
-  const selectAnswer = async (type: "MORE" | "LESS") => {
+  const selectAnswer = async (type: AnswerType) => {
+    setLoading((value) => ({
+      ...value,
+      [type]: true
+    }));
+
     try {
       const { data } = await axios.post("/games/" + game!.id, {
         type
@@ -51,6 +65,11 @@ export default function GamePage() {
     } catch (e) {
       navigate("/game/finish");
     }
+
+    setLoading((value) => ({
+      ...value,
+      [type]: false
+    }));
   };
 
   const showAnimation = async () => {
@@ -62,6 +81,8 @@ export default function GamePage() {
   };
 
   const [firstRequest, secondRequest] = useMemo(() => requests, [requests]);
+
+  const disabled = loading.LESS || loading.MORE;
 
   return (
     <Page className={style.play}>
@@ -83,24 +104,22 @@ export default function GamePage() {
         <h2 className={style.question__title}>Сколько раз в месяц гуглится</h2>
         <p className={style.question__description}>{secondRequest.value}?</p>
         <div className={style.question__actions}>
-          <button
-            className={classNames(
-              style.actions__button,
-              style.actions__buttonLess
-            )}
+          <Button
+            type="less"
+            loading={loading.LESS}
+            disabled={disabled}
             onClick={() => selectAnswer("LESS")}
           >
             Меньше
-          </button>
-          <button
-            className={classNames(
-              style.actions__button,
-              style.actions__buttonMore
-            )}
+          </Button>
+          <Button
+            type="more"
+            loading={loading.MORE}
+            disabled={disabled}
             onClick={() => selectAnswer("MORE")}
           >
             Больше
-          </button>
+          </Button>
         </div>
       </div>
       <div className={style.play__background}>

@@ -20,7 +20,7 @@ export default function Actions() {
       <Button onClick={handleStartGame}>
         Играть заново
       </Button>
-      <Button type="outline">
+      <Button type="outline" onClick={() => navigate("/rating")}>
         Рейтинг
       </Button>
     </div>

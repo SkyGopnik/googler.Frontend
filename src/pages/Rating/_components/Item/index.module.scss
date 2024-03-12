@@ -1,3 +1,5 @@
+@import "style/mixins/hover";
+
 .item {
   height: 60px;
 
@@ -6,6 +8,14 @@
   display: flex;
   align-items: center;
   gap: 12px;
+
+  transition: background-color .3s ease;
+
+  background-color: transparent;
+
+  @include hover {
+    background-color: rgba(#fff, .05);
+  }
 
   &__avatar {
     width: 48px;
@@ -21,7 +31,17 @@
     flex-direction: column;
     gap: 3px;
 
+    overflow: hidden;
+
     .info {
+      &__title,
+      &__description {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+        overflow: hidden;
+      }
+
       &__title {
         font-size: 16px;
         font-weight: 400;
@@ -49,6 +69,8 @@
     font-weight: 400;
     line-height: 129%;
     letter-spacing: -0.02em;
+
+    white-space: nowrap;
 
     color: #fff;
   }

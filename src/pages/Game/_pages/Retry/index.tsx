@@ -9,29 +9,35 @@ import axios from "axios";
 import { useGameStore } from "store/game";
 import { getStaticUrl } from "utils/getStaticUrl";
 import bridge, { EAdsFormats } from "@vkontakte/vk-bridge";
+import { useState } from "react";
+import { useAsyncEffect } from "hooks/useAsyncEffect";
+import { declNum } from "utils/declNum";
 
 import style from "./index.module.scss";
 
 export default function GameRetryPage() {
+  const groupOptions = {
+    group_id: 210602912
+  };
+
   const { requests, game } = useGameStore();
 
   const navigate = useNavigate();
 
-  const handleContinueGame = async () => {
-    const supported = bridge.supports("VKWebAppJoinGroup");
+  const [userSubscribed, setUserSubscribed] = useState(false);
 
-    if (!supported) {
-      return navigate("/game");
-    }
-
+  useAsyncEffect(async () => {
     try {
-      const groupOptions = {
-        group_id: 210602912
-      };
-
       const groupInfo = await bridge.send("VKWebAppGetGroupInfo", groupOptions);
+      setUserSubscribed(groupInfo.is_member === 1);
+    } catch (e) {
+      console.error(e);
+    }
+  }, []);
 
-      if (groupInfo.is_member === 1) {
+  const handleContinueGame = async () => {
+    try {
+      if (userSubscribed) {
         bridge.send("VKWebAppShowNativeAds", {
           ad_format: EAdsFormats.REWARD
         }).catch((err) => console.log(err));
@@ -72,10 +78,10 @@ export default function GameRetryPage() {
               start={0}
               end={previousRequest.count}
             />
-            <span>раз в месяц</span>
+            <span>{declNum(previousRequest.count, ["раз", "раза", "раз"])} в месяц</span>
           </p>
         </div>
-        <p className={style.caption}>Продолжи раунд, посмотрев небольшую рекламу</p>
+        <p className={style.caption}>Продолжи раунд, {userSubscribed ? "посмотрев небольшую рекламу" : "подписавшись на группу"}</p>
         <div className={style.actions}>
           <Button onClick={handleContinueGame}>Продолжить игру</Button>
           <Button type="ghost" onClick={handleEndGame}>Завершить раунд</Button>

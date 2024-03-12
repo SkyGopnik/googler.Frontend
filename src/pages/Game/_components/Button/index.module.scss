@@ -1,0 +1,45 @@
+.button {
+  height: 44px;
+
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 120%;
+
+  text-align: center;
+
+  cursor: pointer;
+
+  border: none;
+  border-radius: 30px;
+
+  transition: opacity .3s ease;
+
+  color: #fff;
+
+  &:hover,
+  &:disabled {
+    opacity: .7;
+  }
+
+  &:disabled {
+    pointer-events: none;
+  }
+
+  &__icon {
+    fill: #ffffff;
+  }
+
+  &Less {
+    background: #ff4a2b;
+  }
+
+  &More {
+    background: #3bc33b;
+  }
+}
