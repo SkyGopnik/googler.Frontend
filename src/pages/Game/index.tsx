@@ -2,11 +2,12 @@ import CountUp from "react-countup";
 import Page from "components/Page";
 import { useGameStore } from "store/game";
 import axios from "axios";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
 import Background from "components/Background";
 import { delay } from "utils/delay";
 import { getStaticUrl } from "utils/getStaticUrl";
+import { BannerAds } from "utils/bannerAds";
 
 import Button from "./_components/Button";
 
@@ -33,6 +34,10 @@ export default function GamePage() {
     LESS: false,
     MORE: false
   });
+
+  useEffect(() => {
+    BannerAds.hide();
+  }, []);
 
   const selectAnswer = async (type: AnswerType) => {
     setLoading((value) => ({

@@ -54,6 +54,10 @@ export default function GameRetryPage() {
   const handleEndGame = async () => {
     await axios.post(`/games/${game!.id}/finish`);
 
+    bridge.send("VKWebAppShowNativeAds", {
+      ad_format: EAdsFormats.INTERSTITIAL
+    }).catch((err) => console.log(err));
+
     navigate("/game/finish");
   };
 
