@@ -4,8 +4,8 @@ export type RatingItem = {
   user: {
     id: string,
     profile: {
+      id: string,
       platform: string,
-      id: 126399522,
       firstName: string,
       lastName: string,
       photoUrl: string

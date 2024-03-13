@@ -17,6 +17,10 @@
     background-color: rgba(#fff, .05);
   }
 
+  &Active {
+    background-color: rgba(#fff, .03);
+  }
+
   &__avatar {
     width: 48px;
     height: 48px;
@@ -24,6 +28,8 @@
     object-fit: cover;
 
     border-radius: 50%;
+
+    background-color: rgba(#fff, .1);
   }
 
   &__info {

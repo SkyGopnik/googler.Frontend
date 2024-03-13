@@ -1,6 +1,6 @@
 import bridge, { BannerAdLocation } from "@vkontakte/vk-bridge";
 
-export class BannerAds {
+export class Banner {
 
   public static show() {
     bridge.send("VKWebAppShowBannerAd", {

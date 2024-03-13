@@ -126,12 +126,23 @@
     z-index: 40;
 
     img {
-      width: 100%;
-      height: 50%;
+      &:nth-child(1),
+      &:nth-child(2) {
+        width: 100%;
+        height: 50%;
 
-      opacity: .5;
+        opacity: .5;
 
-      object-fit: cover;
+        object-fit: cover;
+      }
+
+      &:nth-child(3) {
+        position: absolute;
+
+        visibility: hidden;
+
+        z-index: -1;
+      }
     }
   }
 }

@@ -7,12 +7,13 @@ interface Props extends AProps {
   avatar: string,
   title: string,
   description: string,
-  place: number
+  place: number,
+  isActive?: boolean
 }
 
-export default function Item({ avatar, title, description, place, ...props }: Props) {
+export default function Item({ avatar, title, description, place, isActive, ...props }: Props) {
   return (
-    <a {...props} className={classNames(style.item, props.className)}>
+    <a {...props} className={classNames(style.item, { [style.itemActive]: isActive }, props.className)}>
       <img className={style.item__avatar} src={avatar} alt="Аватар пользователя" />
       <div className={style.item__info}>
         <span className={style.info__title}>{title}</span>

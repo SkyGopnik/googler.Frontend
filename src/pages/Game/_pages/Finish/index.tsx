@@ -5,7 +5,7 @@ import Title from "components/Title";
 import Stats from "components/Stats";
 import { useGameStore } from "store/game";
 import { useEffect } from "react";
-import { BannerAds } from "utils/bannerAds";
+import { Banner } from "utils/banner";
 
 import Actions from "./_components/Actions";
 
@@ -15,7 +15,7 @@ export default function GameFinishPage() {
   const { game, stats } = useGameStore();
 
   useEffect(() => {
-    BannerAds.show();
+    Banner.show();
   }, []);
 
   return (

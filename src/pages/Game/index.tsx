@@ -7,7 +7,7 @@ import { useNavigate } from "react-router";
 import Background from "components/Background";
 import { delay } from "utils/delay";
 import { getStaticUrl } from "utils/getStaticUrl";
-import { BannerAds } from "utils/bannerAds";
+import { Banner } from "utils/banner";
 
 import Button from "./_components/Button";
 
@@ -27,6 +27,7 @@ export default function GamePage() {
     setRequests
   } = useGameStore();
 
+  const [images, setImages] = useState<[string, string]>(["", ""]);
   const [animationActive, setAnimationActive] = useState(false);
   const [loading, setLoading] = useState<{
     [key in AnswerType]: boolean
@@ -35,8 +36,10 @@ export default function GamePage() {
     MORE: false
   });
 
+  useEffect(() => setRequestImages(), []);
+
   useEffect(() => {
-    BannerAds.hide();
+    Banner.hide();
   }, []);
 
   const selectAnswer = async (type: AnswerType) => {
@@ -85,6 +88,14 @@ export default function GamePage() {
     setAnimationActive(false);
   };
 
+  const setRequestImages = () => {
+    const [firstRequest, secondRequest] = requests;
+
+    setImages([firstRequest.imageId, secondRequest.imageId]);
+  };
+
+  const handleRequestImageLoaded = () => setRequestImages();
+
   const [firstRequest, secondRequest] = useMemo(() => requests, [requests]);
 
   const disabled = loading.LESS || loading.MORE;
@@ -128,8 +139,13 @@ export default function GamePage() {
         </div>
       </div>
       <div className={style.play__background}>
-        <img src={getStaticUrl(firstRequest.imageId)} alt="Верхнее изображение" />
-        <img src={getStaticUrl(secondRequest.imageId)} alt="Нижнее изображение" />
+        <img src={getStaticUrl(images[0])} alt="Верхнее изображение" />
+        <img src={getStaticUrl(images[1])} alt="Нижнее изображение" />
+        <img
+          src={getStaticUrl(secondRequest.imageId)}
+          alt="Загрузка изображения"
+          onLoad={handleRequestImageLoaded}
+        />
       </div>
       <Background
         type="success"

@@ -5,7 +5,7 @@ import Stats from "components/Stats";
 import { useGameStore } from "store/game";
 import { useAsyncEffect } from "hooks/useAsyncEffect";
 import { useEffect } from "react";
-import { BannerAds } from "utils/bannerAds";
+import { Banner } from "utils/banner";
 
 import Actions from "./_components/Actions";
 import Logo from "./_components/Logo";
@@ -20,7 +20,7 @@ export default function MainPage() {
   }, []);
 
   useEffect(() => {
-    BannerAds.show();
+    Banner.show();
   }, []);
 
   return (

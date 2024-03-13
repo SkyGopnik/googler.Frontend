@@ -2,6 +2,7 @@ import Page from "components/Page";
 import { useState } from "react";
 import { useAsyncEffect } from "hooks/useAsyncEffect";
 import axios from "axios";
+import queryGet from "utils/queryGet";
 
 import Item from "./_components/Item";
 import Header from "./_components/Header";
@@ -32,6 +33,7 @@ export default function RatingPage() {
             avatar={item.user.profile.photoUrl}
             title={`${item.user.profile.firstName} ${item.user.profile.lastName}`}
             description={`Рекорд ${item.record}`}
+            isActive={item.user.profile.id === queryGet("vk_user_id")}
           />
         ))}
       </div>
