@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import * as path from "path";
 import { readdirSync } from "fs";
+import { viteSingleFile } from "vite-plugin-singlefile";
 
 const absolutePathAliases: { [key: string]: string } = {};
 
@@ -21,5 +22,5 @@ export default defineConfig({
     }
   },
   root: "./src",
-  plugins: [react()]
+  plugins: [react(), viteSingleFile()]
 });

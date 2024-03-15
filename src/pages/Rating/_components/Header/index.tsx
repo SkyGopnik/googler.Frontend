@@ -12,11 +12,13 @@ export default function Header({ children }: Props) {
   const navigate = useNavigate();
 
   return (
-    <div className={style.header}>
-      <button className={style.header__back} onClick={() => navigate(-1)}>
-        <img src={ChevronIcon} alt="Ионка назад" />
-      </button>
-      <span className={style.header__text}>{children}</span>
+    <div className={style.headerWrapper}>
+      <div className={style.header}>
+        <button className={style.header__back} onClick={() => navigate(-1)}>
+          <img src={ChevronIcon} alt="Ионка назад" />
+        </button>
+        <span className={style.header__text}>{children}</span>
+      </div>
     </div>
   );
 }

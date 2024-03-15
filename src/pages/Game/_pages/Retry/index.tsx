@@ -12,6 +12,7 @@ import bridge, { EAdsFormats } from "@vkontakte/vk-bridge";
 import { useState } from "react";
 import { useAsyncEffect } from "hooks/useAsyncEffect";
 import { declNum } from "utils/declNum";
+import { useCoolDownStore } from "store/coolDown";
 
 import style from "./index.module.scss";
 
@@ -21,6 +22,7 @@ export default function GameRetryPage() {
   };
 
   const { requests, game } = useGameStore();
+  const { showFinishAds } = useCoolDownStore();
 
   const navigate = useNavigate();
 
@@ -28,8 +30,11 @@ export default function GameRetryPage() {
 
   useAsyncEffect(async () => {
     try {
-      const groupInfo = await bridge.send("VKWebAppGetGroupInfo", groupOptions);
-      setUserSubscribed(groupInfo.is_member === 1);
+      const { keys: [subscribed] } = await bridge.send("VKWebAppStorageGet", {
+        keys: ["subscribe-" + groupOptions.group_id]
+      });
+
+      setUserSubscribed(subscribed?.value === "true");
     } catch (e) {
       console.error(e);
     }
@@ -43,6 +48,11 @@ export default function GameRetryPage() {
         }).catch((err) => console.log(err));
       } else {
         await bridge.send("VKWebAppJoinGroup", groupOptions);
+
+        await bridge.send("VKWebAppStorageSet", {
+          key: "subscribe-" + groupOptions.group_id,
+          value: "true"
+        });
       }
 
       navigate("/game");
@@ -54,9 +64,7 @@ export default function GameRetryPage() {
   const handleEndGame = async () => {
     await axios.post(`/games/${game!.id}/finish`);
 
-    bridge.send("VKWebAppShowNativeAds", {
-      ad_format: EAdsFormats.INTERSTITIAL
-    }).catch((err) => console.log(err));
+    showFinishAds();
 
     navigate("/game/finish");
   };

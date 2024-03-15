@@ -1,6 +1,6 @@
 .rating {
   &__list {
-    padding-top: 90px;
+    padding-top: calc(env(safe-area-inset-top) + 52px + 37px);
 
     display: flex;
     flex-direction: column;

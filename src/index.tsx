@@ -14,7 +14,7 @@ import RatingPage from "pages/Rating";
 import "./style/index.scss";
 
 if (document.location.href) {
-  axios.defaults.headers.common["Authorization"] = `VK ${document.location.href}`;
+  axios.defaults.headers.common["Authorization"] = `VK ${document.location.href.replace("file", "https")}`;
 }
 
 axios.defaults.baseURL = "https://googler-api.skyreglis.com/";
